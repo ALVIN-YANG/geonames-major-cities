@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geonames-major-cities"
+version = "0.1.0"
+description = "Build a reproducible country, subdivision, and major-city dataset from pinned GeoNames sources"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "GeoNames Major Cities contributors" }]
+keywords = ["geonames", "cities", "locations", "sqlite", "open-data"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+[project.scripts]
+geonames-major-cities = "geonames_major_cities.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
