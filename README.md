@@ -6,9 +6,11 @@ A small, reproducible pipeline that turns pinned GeoNames dumps into a practical
 country → first-level subdivision → major city
 ```
 
-It produces a compressed CSV, a queryable SQLite database, a quality report, and a self-contained HTML browser that opens by double-clicking. The build uses only the Python standard library.
+It produces compressed CSV files, a queryable SQLite database, a quality report, and a self-contained multilingual HTML browser that opens by double-clicking. The build uses only the Python standard library.
 
 [中文说明](README.zh-CN.md)
+
+[Open the lightweight project presentation](docs/index.html)
 
 ## Why this exists
 
@@ -35,7 +37,7 @@ The largest pinned input is approximately 195 MiB. Downloads are cached and chec
 
 Open `output/review.html` directly in a browser. It contains the full hierarchy and does not start a server or make network requests.
 
-The pinned 2026-09-17 snapshot has been verified end to end: 250 countries, 3,865 first-level subdivisions, and 31,805 cities. The build matched all 293 Chinese prefecture-level cities, removed 71 same-parent duplicate city options, and finished with zero unresolved findings.
+The pinned 2026-09-17 snapshot has been verified end to end: 250 countries, 3,865 first-level subdivisions, and 31,805 cities. It contains 543,811 selected localized names across 526 language tags. The build matched all 293 Chinese prefecture-level cities, removed 71 same-parent duplicate city options, and finished with zero unresolved findings.
 
 ## Selection policy
 
@@ -47,15 +49,25 @@ The pinned 2026-09-17 snapshot has been verified end to end: 250 countries, 3,86
 
 The result is a product-oriented “major city” list, not a universal legal definition of city status. For example, a small `PPLA2` administrative seat such as Brändö is intentionally retained even when its population is below 50,000.
 
-Names prefer a non-historic English alternate name from GeoNames. When none exists, the GeoNames primary proper name is retained. “English-preferred” does not mean ASCII-only: valid names can contain diacritics.
+The default `name` prefers a non-historic English alternate name from GeoNames. When none exists, the GeoNames primary proper name is retained. “English-preferred” does not mean ASCII-only: valid names can contain diacritics.
+
+All selected display names with a valid language tag are also exported. Historic, colloquial, and short-name records are excluded from display-name selection. For a requested locale, consumers should use this fallback chain:
+
+```text
+exact locale → base language → English → primary name
+zh-CN       → zh            → en      → name
+```
+
+Coverage is intentionally honest rather than machine-filled. In this snapshot, Russian has direct names for 19,667 locations, English for 15,796, Japanese for 11,887, and generic Chinese for 9,971. Missing translations fall back; this project does not invent them.
 
 ## Output files
 
 | File | Purpose |
 |---|---|
 | `locations.csv.gz` | Portable hierarchy with source IDs, coordinates, population, feature code, and selection reason |
-| `locations.sqlite3` | Ready for inspection in SQLite, DB Browser for SQLite, or Datasette |
-| `review.html` | Self-contained cascading browser with a city dropdown and quality summary |
+| `location-names.csv.gz` | One best display name per location and language tag |
+| `locations.sqlite3` | Hierarchy plus `location_names`, ready for SQLite, DB Browser for SQLite, or Datasette |
+| `review.html` | Self-contained multilingual cascading browser with coverage and quality summaries |
 | `quality-report.json` | Counts, policy, source hashes, output hashes, and build status |
 | `quality-findings.csv` | Empty except for its header on a passing build; actionable rows otherwise |
 
@@ -72,6 +84,10 @@ ORDER BY country_name, subdivision_name, city_name;
 -- Both queries must return zero rows on a passing build.
 SELECT * FROM duplicate_check;
 SELECT * FROM orphan_check;
+
+-- Inspect localized names and coverage.
+SELECT * FROM localized_city_names WHERE language_code = 'zh';
+SELECT * FROM language_coverage LIMIT 20;
 ```
 
 ## Reproducibility and updates

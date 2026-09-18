@@ -20,6 +20,13 @@ OUTPUT_COLUMNS = (
     "featureCode",
     "selectionReason",
 )
+LOCALIZED_NAME_COLUMNS = (
+    "type",
+    "sourceId",
+    "languageCode",
+    "name",
+    "isPreferred",
+)
 
 
 class DatasetError(RuntimeError):
@@ -41,6 +48,15 @@ class LocationRecord:
     population: int | None
     featureCode: str | None
     selectionReason: str
+
+
+@dataclass(frozen=True)
+class LocalizedName:
+    type: str
+    sourceId: int
+    languageCode: str
+    name: str
+    isPreferred: bool
 
 
 @dataclass(frozen=True)

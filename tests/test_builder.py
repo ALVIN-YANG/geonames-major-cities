@@ -50,6 +50,9 @@ class DatasetBuilderTest(unittest.TestCase):
             {"COUNTRY": 3, "SUBDIVISION": 3, "CITY": 4}, report["counts"]
         )
         self.assertEqual(1, report["duplicateCityOptionsRemoved"])
+        self.assertTrue(report["policy"]["translationsIncluded"])
+        self.assertGreaterEqual(report["languageCount"], 4)
+        self.assertGreaterEqual(report["localizedNameCount"], 10)
         csv_text = self.gzip_text(self.output_dir / "locations.csv.gz")
         self.assertIn("Hangzhou", csv_text)
         self.assertIn("Ningbo", csv_text)
@@ -59,10 +62,19 @@ class DatasetBuilderTest(unittest.TestCase):
         self.assertNotIn("Yiwu", csv_text)
         self.assertNotIn("Beijing City", csv_text)
         self.assertEqual(1, csv_text.count("Los Angeles"))
+        names_text = self.gzip_text(self.output_dir / "location-names.csv.gz")
+        self.assertIn("COUNTRY,1814991,zh,中国,True", names_text)
+        self.assertIn("SUBDIVISION,1784764,zh,浙江省,True", names_text)
+        self.assertIn("CITY,1808926,zh-CN,杭州市,True", names_text)
+        self.assertNotIn("https://example.invalid", names_text)
+        self.assertNotIn(",link,", names_text)
+        self.assertNotIn(",LA,", names_text)
+        self.assertNotIn("Old Los Angeles", names_text)
 
         html = (self.output_dir / "review.html").read_text(encoding="utf-8")
-        self.assertIn("double-clicking this HTML file", html)
-        self.assertIn("<select id=\"city\" size=\"10\">", html)
+        self.assertIn("double-click it", html)
+        self.assertIn("id=\"language\"", html)
+        self.assertIn("id=\"city\" size=\"12\"", html)
         self.assertNotIn("<script src=", html)
         self.assertNotIn("fetch(", html)
 
@@ -81,6 +93,22 @@ class DatasetBuilderTest(unittest.TestCase):
             self.assertEqual(
                 0, connection.execute("SELECT COUNT(*) FROM orphan_check").fetchone()[0]
             )
+            self.assertEqual(
+                "中国",
+                connection.execute(
+                    "SELECT name FROM location_names "
+                    "WHERE location_type='COUNTRY' AND source_id=1814991 "
+                    "AND language_code='zh'"
+                ).fetchone()[0],
+            )
+            self.assertEqual(
+                "Hangzhou",
+                connection.execute(
+                    "SELECT name FROM location_names "
+                    "WHERE location_type='CITY' AND source_id=1808926 "
+                    "AND language_code='en'"
+                ).fetchone()[0],
+            )
         finally:
             connection.close()
 
@@ -95,6 +123,10 @@ class DatasetBuilderTest(unittest.TestCase):
         self.assertEqual(
             sha256_file(first / "locations.csv.gz"),
             sha256_file(second / "locations.csv.gz"),
+        )
+        self.assertEqual(
+            sha256_file(first / "location-names.csv.gz"),
+            sha256_file(second / "location-names.csv.gz"),
         )
 
     def write_fixture(self) -> dict:
@@ -142,15 +174,24 @@ class DatasetBuilderTest(unittest.TestCase):
         self.write_zip(
             alternate_names,
             "alternateNamesV2.txt",
-            "1\t1808926\ten\tHangzhou\t1\t\t\t\t\n"
+            "1\t1808926\ten\tHangchow\t\t\t\t\t\n"
+            "2\t1808926\ten\tHangzhou\t1\t\t\t\t\n"
             "11\t1808926\tzh-CN\t杭州市\t1\t\t\t\t\n"
+            "21\t1808926\tzh\t杭州\t1\t\t\t\t\n"
             "3\t1799397\ten\tNingbo\t1\t\t\t\t\n"
             "12\t1799397\tzh-CN\t宁波市\t1\t\t\t\t\n"
             "13\t1812966\tzh-CN\t德清县\t1\t\t\t\t\n"
             "14\t1805528\tzh-CN\t义乌市\t1\t\t\t\t\n"
             "4\t5368361\ten\tLos Angeles\t1\t\t\t\t\n"
             "5\t5368362\ten\tLos Angeles\t1\t\t\t\t\n"
-            "6\t1821274\ten\tMacau\t1\t\t\t\t\n",
+            "6\t1821274\ten\tMacau\t1\t\t\t\t\n"
+            "30\t1814991\tzh\t中国\t1\t\t\t\t\n"
+            "31\t6252001\tes\tEstados Unidos\t1\t\t\t\t\n"
+            "32\t1784764\tzh\t浙江省\t1\t\t\t\t\n"
+            "33\t5332921\tes\tCalifornia\t1\t\t\t\t\n"
+            "40\t5368361\tlink\thttps://example.invalid\t1\t\t\t\t\n"
+            "41\t5368361\ten\tLA\t\t1\t\t\t\n"
+            "42\t5368361\ten\tOld Los Angeles\t\t\t\t1\t\n",
         )
         china_cities = self.data_dir / "china-prefecture-city-policy.json"
         china_cities.write_text(

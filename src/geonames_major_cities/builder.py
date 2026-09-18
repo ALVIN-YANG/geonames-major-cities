@@ -1,10 +1,18 @@
 from __future__ import annotations
 
+import re
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
+from dataclasses import replace
 from pathlib import Path
 
-from .models import DatasetError, LocationRecord, ReviewFinding, normalized_name
+from .models import (
+    DatasetError,
+    LocalizedName,
+    LocationRecord,
+    ReviewFinding,
+    normalized_name,
+)
 from .outputs import write_outputs
 from .policy import (
     ALWAYS_INCLUDED_CITY_CODES,
@@ -158,10 +166,32 @@ def parse_city_candidates(
     return candidates, filtered
 
 
+VALID_LANGUAGE_CODE = re.compile(r"^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$")
+
+
+def canonical_language_code(value: str) -> str | None:
+    if not VALID_LANGUAGE_CODE.fullmatch(value):
+        return None
+    parts = value.split("-")
+    canonical = [parts[0].lower()]
+    for part in parts[1:]:
+        if len(part) == 2 and part.isalpha():
+            canonical.append(part.upper())
+        elif len(part) == 4 and part.isalpha():
+            canonical.append(part.title())
+        else:
+            canonical.append(part)
+    return "-".join(canonical)
+
+
 def parse_names(
-    path: Path, candidate_ids: set[int], china_candidate_ids: set[int]
-) -> tuple[dict[int, str], dict[int, set[str]]]:
-    english: dict[int, list[tuple[int, int, str]]] = defaultdict(list)
+    path: Path, eligible_ids: set[int], china_candidate_ids: set[int]
+) -> tuple[
+    dict[int, str],
+    dict[int, set[str]],
+    dict[tuple[int, str], tuple[str, bool]],
+]:
+    best: dict[tuple[int, str], tuple[int, int, str, bool]] = {}
     chinese: dict[int, set[str]] = defaultdict(set)
     for line in zip_text_lines(path):
         fields = line.rstrip("\n").split("\t")
@@ -171,33 +201,76 @@ def parse_names(
             source_id = int(fields[1])
         except ValueError:
             continue
-        if source_id not in candidate_ids:
+        if source_id not in eligible_ids:
             continue
         fields += [""] * (8 - len(fields))
-        language = fields[2]
-        if fields[6] == "1" or fields[7] == "1":
+        raw_language = fields[2].strip()
+        is_short = fields[5] == "1"
+        is_colloquial = fields[6] == "1"
+        is_historic = fields[7] == "1"
+        if is_colloquial or is_historic:
             continue
         alternate_name = fields[3].strip()
         if (
             source_id in china_candidate_ids
-            and language in {"zh", "zh-CN"}
+            and raw_language in {"zh", "zh-CN"}
             and alternate_name
         ):
             chinese[source_id].add(alternate_name.removesuffix("市"))
-        if language != "en" or fields[5] == "1" or not alternate_name:
+        language = canonical_language_code(raw_language)
+        if language is None or is_short or not alternate_name:
             continue
-        preferred = 1 if fields[4] == "1" else 0
+        preferred = fields[4] == "1"
         try:
             alternate_id = int(fields[0])
         except ValueError:
             continue
-        english[source_id].append((preferred, alternate_id, alternate_name))
+        candidate = (0 if preferred else 1, alternate_id, alternate_name, preferred)
+        key = (source_id, language)
+        if key not in best or candidate[:2] < best[key][:2]:
+            best[key] = candidate
 
-    selected: dict[int, str] = {}
-    for source_id, values in english.items():
-        values.sort(key=lambda value: (-value[0], value[1]))
-        selected[source_id] = values[0][2]
-    return selected, chinese
+    selected = {
+        key: (value[2], value[3]) for key, value in best.items()
+    }
+    english = {
+        source_id: name
+        for (source_id, language), (name, _preferred) in selected.items()
+        if language == "en"
+    }
+    return english, chinese, selected
+
+
+def apply_english_names(
+    records: Sequence[LocationRecord], english_names: Mapping[int, str]
+) -> list[LocationRecord]:
+    return [
+        replace(record, name=english_names.get(record.sourceId, record.name))
+        for record in records
+    ]
+
+
+def build_localized_names(
+    records: Sequence[LocationRecord],
+    selected_names: Mapping[tuple[int, str], tuple[str, bool]],
+) -> list[LocalizedName]:
+    type_by_source_id = {record.sourceId: record.type for record in records}
+    type_order = {"COUNTRY": 0, "SUBDIVISION": 1, "CITY": 2}
+    names = [
+        LocalizedName(
+            type_by_source_id[source_id], source_id, language, name, preferred
+        )
+        for (source_id, language), (name, preferred) in selected_names.items()
+        if source_id in type_by_source_id
+    ]
+    return sorted(
+        names,
+        key=lambda value: (
+            type_order[value.type],
+            value.sourceId,
+            value.languageCode,
+        ),
+    )
 
 
 def build_city_records(
@@ -319,6 +392,51 @@ def review_records(records: Sequence[LocationRecord]) -> list[ReviewFinding]:
     return findings
 
 
+def review_localized_names(
+    records: Sequence[LocationRecord], names: Sequence[LocalizedName]
+) -> list[ReviewFinding]:
+    findings: list[ReviewFinding] = []
+    record_keys = {(record.type, record.sourceId) for record in records}
+    seen: set[tuple[str, int, str]] = set()
+    for name in names:
+        key = (name.type, name.sourceId, name.languageCode)
+        if key in seen:
+            findings.append(
+                ReviewFinding(
+                    "DUPLICATE_LOCALIZED_NAME",
+                    name.type,
+                    name.sourceId,
+                    None,
+                    name.name,
+                    f"duplicate language={name.languageCode}",
+                )
+            )
+        seen.add(key)
+        if (name.type, name.sourceId) not in record_keys:
+            findings.append(
+                ReviewFinding(
+                    "ORPHAN_LOCALIZED_NAME",
+                    name.type,
+                    name.sourceId,
+                    None,
+                    name.name,
+                    f"language={name.languageCode}",
+                )
+            )
+        if not name.name or any(ord(character) < 32 for character in name.name):
+            findings.append(
+                ReviewFinding(
+                    "INVALID_LOCALIZED_NAME",
+                    name.type,
+                    name.sourceId,
+                    None,
+                    name.name,
+                    f"language={name.languageCode}",
+                )
+            )
+    return findings
+
+
 def review_policy_sentinels(
     records: Sequence[LocationRecord], quality_checks: Mapping
 ) -> list[ReviewFinding]:
@@ -386,9 +504,12 @@ def build_dataset(manifest: Mapping, data_dir: Path, output_dir: Path) -> dict:
         for source_id, city in candidates.items()
         if city["country_code"] == "CN"
     }
-    english_names, china_names = parse_names(
+    eligible_name_ids = (
+        set(country_ids.values()) | set(subdivision_ids.values()) | set(candidates)
+    )
+    english_names, china_names, selected_names = parse_names(
         source_path(manifest, data_dir, "alternateNames"),
-        set(candidates),
+        eligible_name_ids,
         china_candidate_ids,
     )
     china_policy = parse_china_city_policy(
@@ -411,6 +532,8 @@ def build_dataset(manifest: Mapping, data_dir: Path, output_dir: Path) -> dict:
             china_official_codes,
         )
     )
+    countries = apply_english_names(countries, english_names)
+    subdivisions = apply_english_names(subdivisions, english_names)
     type_order = {"COUNTRY": 0, "SUBDIVISION": 1, "CITY": 2}
     records = sorted(
         countries + subdivisions + cities,
@@ -422,7 +545,9 @@ def build_dataset(manifest: Mapping, data_dir: Path, output_dir: Path) -> dict:
             value.sourceId,
         ),
     )
+    localized_names = build_localized_names(records, selected_names)
     findings = review_records(records)
+    findings.extend(review_localized_names(records, localized_names))
     findings.extend(china_findings)
     findings.extend(review_policy_sentinels(records, quality_checks))
     findings.sort(
@@ -435,6 +560,16 @@ def build_dataset(manifest: Mapping, data_dir: Path, output_dir: Path) -> dict:
         )
     )
     counts = Counter(record.type for record in records)
+    coverage: dict[str, set[tuple[str, int]]] = defaultdict(set)
+    for name in localized_names:
+        coverage[name.languageCode].add((name.type, name.sourceId))
+    language_coverage = {
+        language: len(location_keys)
+        for language, location_keys in sorted(
+            coverage.items(), key=lambda item: (-len(item[1]), item[0])
+        )
+    }
+    translated_location_keys = set().union(*coverage.values()) if coverage else set()
     report = {
         "source": manifest["source"],
         "sourceVersion": manifest["sourceVersion"],
@@ -446,12 +581,23 @@ def build_dataset(manifest: Mapping, data_dir: Path, output_dir: Path) -> dict:
             "chinaCitySelection": "PINNED_PREFECTURE_LEVEL_CITY_POLICY",
             "chinaDirectMunicipalitiesAreTerminalSubdivisions": True,
             "excludedCountryCodes": sorted(excluded_country_codes),
-            "translationsIncluded": False,
+            "translationsIncluded": True,
+            "localizedNameSelection": (
+                "preferred non-short, non-colloquial, non-historic name; "
+                "lowest alternate-name ID as deterministic fallback"
+            ),
+            "runtimeFallback": "exact locale, base language, English, primary name",
         },
         "counts": {
             key: counts.get(key, 0) for key in ("COUNTRY", "SUBDIVISION", "CITY")
         },
-        "englishPreferredNameCount": len(english_names),
+        "englishPreferredNameCount": sum(
+            1 for record in records if (record.sourceId, "en") in selected_names
+        ),
+        "localizedNameCount": len(localized_names),
+        "languageCount": len(language_coverage),
+        "translatedLocationCount": len(translated_location_keys),
+        "languageCoverage": language_coverage,
         "chinaOfficialPrefectureCityCount": sum(
             len(values) for values in china_policy.values()
         ),
@@ -471,4 +617,4 @@ def build_dataset(manifest: Mapping, data_dir: Path, output_dir: Path) -> dict:
             for key, value in manifest["assets"].items()
         },
     }
-    return write_outputs(output_dir, records, findings, report)
+    return write_outputs(output_dir, records, localized_names, findings, report)
