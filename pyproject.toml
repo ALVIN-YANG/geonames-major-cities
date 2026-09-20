@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "geonames-major-cities"
-version = "0.2.0"
+version = "0.3.0"
 description = "Build a reproducible country, subdivision, and major-city dataset from pinned GeoNames sources"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -22,6 +22,9 @@ classifiers = [
 
 [project.scripts]
 geonames-major-cities = "geonames_major_cities.cli:main"
+
+[project.optional-dependencies]
+audit = ["duckdb>=1.5,<2"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

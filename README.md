@@ -103,6 +103,24 @@ To update the data:
 
 Do not treat a new upstream snapshot as automatically safe. Administrative data changes, and GeoNames feature classifications can change independently.
 
+## Supplementary-source audit
+
+Wikidata, Who's On First, and Overture can be measured without changing the canonical GeoNames output. The audit uses exact GeoNames IDs and Wikidata QIDs only; it does not use fuzzy name matching, machine translation, or a language model.
+
+Install the optional DuckDB dependency, then run:
+
+```bash
+python -m pip install -e '.[audit]'
+
+geonames-major-cities audit-sources \
+  --dataset output/locations.sqlite3 \
+  --geonames-alternate-names data/alternateNamesV2.zip \
+  --cache-dir audit-cache \
+  --output-dir audit-output
+```
+
+The command projects only required Parquet columns and joins them to the current dataset by exact identifiers. Who's On First stays remote; the current Overture division release is one roughly 550 MiB Parquet file, so the script downloads that pinned file temporarily for a reliable nested-name scan and deletes it after caching only matched rows. It writes `source-audit.json` plus a Chinese `source-audit.md`. Use `--refresh` for a fresh upstream snapshot. The audit reports coverage, conflicts, hierarchy compatibility, provenance, and license boundaries; it never merges candidate names into the formal outputs.
+
 ## Development
 
 ```bash

@@ -83,6 +83,22 @@ SELECT * FROM language_coverage LIMIT 20;
 
 上游下载地址可能变化，但每个清单都固定了文件大小和 SHA-256，所以历史构建不会被悄悄替换。更新数据时应新增带日期的 manifest，不要覆盖旧清单；然后完整构建、比较数量变化并人工浏览抽查。
 
+## 补充来源覆盖审计
+
+可以在不改动 GeoNames 正式输出的前提下，审计 Wikidata、Who's On First 和 Overture 能补充多少多语言名称。整个过程只使用 GeoNames ID 和 Wikidata QID 精确关联，不使用名称模糊匹配、机器翻译或大模型判断。
+
+```bash
+python -m pip install -e '.[audit]'
+
+geonames-major-cities audit-sources \
+  --dataset output/locations.sqlite3 \
+  --geonames-alternate-names data/alternateNamesV2.zip \
+  --cache-dir audit-cache \
+  --output-dir audit-output
+```
+
+脚本只投影 Parquet 的必要字段，并通过精确 ID 与当前数据关联。Who's On First 保持远程读取；当前 Overture division release 是一个约 550 MiB 的 Parquet 文件，为了稳定读取嵌套多语言字段，脚本会临时下载这个固定版本文件，缓存命中行后立即删除原始文件。最终生成 `source-audit.json` 和中文 `source-audit.md`。使用 `--refresh` 可强制刷新上游快照。报告会列出覆盖率、冲突、层级兼容性、数据溯源和许可证边界，但不会把候选名称写入正式数据。
+
 ## 许可证
 
 本仓库代码使用 MIT License。生成数据包含 GeoNames 等上游数据，重新分发时仍需遵守上游许可证和署名要求。详见 [DATA_SOURCES.md](DATA_SOURCES.md)。

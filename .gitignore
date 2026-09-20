@@ -7,4 +7,6 @@ __pycache__/
 .playwright-cli/
 data/
 output/
+audit-cache/
+audit-output/
 *.sqlite3

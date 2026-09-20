@@ -26,3 +26,13 @@ This input is used only as a deterministic inclusion policy for Chinese prefectu
 The source code is covered by this repository's MIT License. Generated datasets are derivative database outputs containing GeoNames data; redistributors must retain GeoNames attribution and comply with CC BY 4.0. The pinned Chinese policy source also remains attributed here under its MIT license.
 
 This project does not imply endorsement by GeoNames, the `cn-division` maintainers, or any government agency.
+
+## Audited supplementary sources
+
+The optional `audit-sources` command measures, but does not merge, candidate names from:
+
+- [Wikidata](https://www.wikidata.org/), licensed CC0. Exact QIDs and entity revision IDs are retained in the local audit cache.
+- [Who's On First](https://www.whosonfirst.org/), whose records and upstream properties have mixed licenses. Its denormalized name columns do not expose sufficient field-level provenance for automatic merging, so results remain audit-only.
+- [Overture Maps Divisions](https://docs.overturemaps.org/guides/divisions/), distributed under ODbL 1.0 with source details on individual properties. Overture results must remain separate from the MIT-licensed core unless an ODbL-compliant output is intentionally produced.
+
+These sources are joined only by GeoNames IDs or Wikidata QIDs. A matching name alone is never accepted as identity evidence.

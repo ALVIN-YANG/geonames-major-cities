@@ -1,0 +1,1499 @@
+{
+  "dataset": {
+    "currentChineseCoverage": 10150,
+    "currentChineseCoverageRate": 0.2826,
+    "locationCount": 35920,
+    "metadata": {
+      "cityCount": "31805",
+      "countryCount": "250",
+      "languageCount": "526",
+      "localizedNameCount": "543811",
+      "qualityStatus": "PASS",
+      "source": "GeoNames",
+      "sourceVersion": "2026-09-17",
+      "subdivisionCount": "3865"
+    },
+    "path": "output/locations.sqlite3"
+  },
+  "generatedAt": "2026-09-20T08:43:32+00:00",
+  "geonamesWikidataLinks": {
+    "conflictCount": 5,
+    "count": 12182,
+    "sampleConflicts": [
+      {
+        "first": "Q504114",
+        "other": "Q22652474",
+        "sourceId": 5967629
+      },
+      {
+        "first": "Q1025830",
+        "other": "Q31809994",
+        "sourceId": 3617448
+      },
+      {
+        "first": "Q596688",
+        "other": "Q124971555",
+        "sourceId": 3617708
+      },
+      {
+        "first": "Q208151",
+        "other": "Q130253115",
+        "sourceId": 3618030
+      },
+      {
+        "first": "Q37957455",
+        "other": "Q39420",
+        "sourceId": 491422
+      }
+    ],
+    "sampleSharedQids": [
+      {
+        "qid": "Q1055",
+        "sourceIds": [
+          2911297,
+          2911298
+        ]
+      },
+      {
+        "qid": "Q1489",
+        "sourceIds": [
+          3527646,
+          3530597
+        ]
+      },
+      {
+        "qid": "Q1490",
+        "sourceIds": [
+          1850144,
+          1850147
+        ]
+      },
+      {
+        "qid": "Q16520",
+        "sourceIds": [
+          1838519,
+          1838524
+        ]
+      },
+      {
+        "qid": "Q172657",
+        "sourceIds": [
+          521118,
+          2026609
+        ]
+      },
+      {
+        "qid": "Q1741",
+        "sourceIds": [
+          2761367,
+          2761369
+        ]
+      },
+      {
+        "qid": "Q1781",
+        "sourceIds": [
+          3054638,
+          3054643
+        ]
+      },
+      {
+        "qid": "Q1853983",
+        "sourceIds": [
+          4566022,
+          4566025
+        ]
+      },
+      {
+        "qid": "Q1858",
+        "sourceIds": [
+          1581129,
+          1581130
+        ]
+      },
+      {
+        "qid": "Q1861",
+        "sourceIds": [
+          1609348,
+          1609350
+        ]
+      },
+      {
+        "qid": "Q1953",
+        "sourceIds": [
+          616051,
+          616052
+        ]
+      },
+      {
+        "qid": "Q20927",
+        "sourceIds": [
+          1835327,
+          1835329
+        ]
+      },
+      {
+        "qid": "Q20934",
+        "sourceIds": [
+          1843561,
+          1843564
+        ]
+      },
+      {
+        "qid": "Q2280",
+        "sourceIds": [
+          625143,
+          625144
+        ]
+      },
+      {
+        "qid": "Q23800",
+        "sourceIds": [
+          2562305,
+          8334638
+        ]
+      },
+      {
+        "qid": "Q2841",
+        "sourceIds": [
+          3688685,
+          3688689
+        ]
+      },
+      {
+        "qid": "Q3624",
+        "sourceIds": [
+          344979,
+          444178
+        ]
+      },
+      {
+        "qid": "Q3703",
+        "sourceIds": [
+          2460594,
+          2460596
+        ]
+      },
+      {
+        "qid": "Q3844",
+        "sourceIds": [
+          2260535,
+          2572183
+        ]
+      },
+      {
+        "qid": "Q3889",
+        "sourceIds": [
+          1040652,
+          1105845
+        ]
+      }
+    ],
+    "sharedQidCount": 24,
+    "uniqueQidCount": 12158
+  },
+  "method": {
+    "fuzzyMatching": false,
+    "machineTranslation": false,
+    "matching": "exact identifiers only",
+    "typeAndCountryValidation": "WOF and Overture validated; Wikidata follows GeoNames explicit wkdt links",
+    "usesLanguageModel": false
+  },
+  "potentialChineseCoverage": {
+    "allSourcesUniqueUnion": {
+      "newLocations": 12233,
+      "projectedCoverageRate": 0.6231,
+      "projectedCoveredLocations": 22383
+    },
+    "note": "technical coverage only; sources cannot be merged without applying each license and provenance rule",
+    "pairwiseOverlap": {
+      "whosOnFirstAndOverture": 806,
+      "wikidataAndOverture": 945,
+      "wikidataAndWhosOnFirst": 3306
+    },
+    "perSource": {
+      "overture": {
+        "newLocations": 958,
+        "projectedCoverageRate": 0.3092,
+        "projectedCoveredLocations": 11108
+      },
+      "whosOnFirst": {
+        "newLocations": 11287,
+        "projectedCoverageRate": 0.5968,
+        "projectedCoveredLocations": 21437
+      },
+      "wikidata": {
+        "newLocations": 4242,
+        "projectedCoverageRate": 0.4007,
+        "projectedCoveredLocations": 14392
+      }
+    }
+  },
+  "schemaVersion": 1,
+  "sources": {
+    "overture": {
+      "license": "ODbL-1.0 for the divisions theme; row sources may add CC0 fields",
+      "matchKey": "GeoNames wkdt QID -> Overture division wikidata",
+      "metrics": {
+        "conflictingExistingNameCount": 31709,
+        "countryMismatchRows": 12,
+        "exactIdentifierMatchRate": 0.2718,
+        "exactIdentifierMatches": 9763,
+        "incompatibleSourceTypes": {
+          "country": 1,
+          "county": 646,
+          "dependency": 29,
+          "localadmin": 25,
+          "locality": 169,
+          "macrohood": 102,
+          "microhood": 5,
+          "neighborhood": 172,
+          "region": 66
+        },
+        "locationsWithAnyNewName": 6297,
+        "missingChineseLocationsFilled": 958,
+        "newLocalizedNamePairs": 87058,
+        "sampleChineseGains": [
+          {
+            "candidate": "西巴拿马省",
+            "currentName": "Panamá Oeste Province",
+            "externalId": "ff38ac85-6cb6-40c8-809c-50699fa5efef",
+            "sourceId": 11353126,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "瓦斯拉拉",
+            "currentName": "Waslala",
+            "externalId": "a86e646d-0a57-4b12-9945-c876cb202c33",
+            "sourceId": 3615745,
+            "type": "CITY"
+          },
+          {
+            "candidate": "波哥大首都区 - 省",
+            "currentName": "Bogota D.C.",
+            "externalId": "3125934d-a555-405f-b494-d25f5430f547",
+            "sourceId": 3688685,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "马乌莱区",
+            "currentName": "Maule Region",
+            "externalId": "707a432d-147e-43fa-bdfd-c7360bb63831",
+            "sourceId": 3880306,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "瓦尔帕莱索区",
+            "currentName": "Valparaiso",
+            "externalId": "45591671-4cae-47d1-a95b-9f8b3e471c0f",
+            "sourceId": 3868621,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "阿克里州",
+            "currentName": "Acre",
+            "externalId": "4060591f-23f8-42b3-9817-eaf64324433e",
+            "sourceId": 3665474,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "圣克鲁斯-德拉谢拉",
+            "currentName": "Santa Cruz de la Sierra",
+            "externalId": "8b3ba542-a9db-4e70-947c-2844c2378b28",
+            "sourceId": 3904906,
+            "type": "CITY"
+          },
+          {
+            "candidate": "拉弗里亞",
+            "currentName": "La Fría",
+            "externalId": "f9215eb2-804d-435f-8021-af3f747f582f",
+            "sourceId": 3795152,
+            "type": "CITY"
+          },
+          {
+            "candidate": "苏利亚州",
+            "currentName": "Zulia",
+            "externalId": "87c596ba-4d85-4fbd-8ce6-02419d8fdcc7",
+            "sourceId": 3625035,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "亚马逊州",
+            "currentName": "Amazonas",
+            "externalId": "e0c2ad99-3920-438e-b809-a75dcd9cb4aa",
+            "sourceId": 3649302,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "聖埃倫娜德瓦伊倫",
+            "currentName": "Santa Elena de Uairén",
+            "externalId": "29a1c211-4f76-4fff-81ad-f1e210698b61",
+            "sourceId": 3627382,
+            "type": "CITY"
+          },
+          {
+            "candidate": "塔奇拉州",
+            "currentName": "Táchira",
+            "externalId": "eb596e33-ec4d-4c7a-aab4-2c85329286b8",
+            "sourceId": 3626553,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "瓜达卢佩",
+            "currentName": "Guadalupe",
+            "externalId": "e5bc83d4-0d95-489d-b43d-cafa4abbcdd9",
+            "sourceId": 4005492,
+            "type": "CITY"
+          },
+          {
+            "candidate": "梅里达州",
+            "currentName": "Estado Mérida",
+            "externalId": "9ff1a36c-3b10-4220-8ec1-ef6e31a2f905",
+            "sourceId": 3632306,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "特鲁希略州",
+            "currentName": "Estado Trujillo",
+            "externalId": "ccc4e886-cd56-4d26-b342-4a8d64e2a68c",
+            "sourceId": 3625974,
+            "type": "SUBDIVISION"
+          }
+        ],
+        "sampleConflicts": [
+          {
+            "candidate": "Алофі",
+            "current": "Пасёлак Алофі",
+            "externalId": "c91c8f54-0d12-4f2a-aefb-db8c75404015",
+            "language": "be",
+            "sourceId": 4036284,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Αλόφι",
+            "current": "Alofi",
+            "externalId": "c91c8f54-0d12-4f2a-aefb-db8c75404015",
+            "language": "el",
+            "sourceId": 4036284,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Паґо-Паґо",
+            "current": "Паго-Паго",
+            "externalId": "19b61a55-fe71-497c-853b-9e8393a0b0f4",
+            "language": "uk",
+            "sourceId": 5881576,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Samowa",
+            "current": "Samoa",
+            "externalId": "a92c1621-fad0-4bdd-963b-9623f7514df2",
+            "language": "ha",
+            "sourceId": 4034894,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "សាមូអា",
+            "current": "សាម័រ",
+            "externalId": "a92c1621-fad0-4bdd-963b-9623f7514df2",
+            "language": "km",
+            "sourceId": 4034894,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "ประเทศซามัว",
+            "current": "ซามัว",
+            "externalId": "a92c1621-fad0-4bdd-963b-9623f7514df2",
+            "language": "th",
+            "sourceId": 4034894,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "Samoa",
+            "current": "Xa-moa (Samoa)",
+            "externalId": "a92c1621-fad0-4bdd-963b-9623f7514df2",
+            "language": "vi",
+            "sourceId": 4034894,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "Orílẹ́ède Samọ",
+            "current": "Samọ",
+            "externalId": "a92c1621-fad0-4bdd-963b-9623f7514df2",
+            "language": "yo",
+            "sourceId": 4034894,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "萨摩亚 / 薩摩亞",
+            "current": "萨摩亚",
+            "externalId": "a92c1621-fad0-4bdd-963b-9623f7514df2",
+            "language": "zh",
+            "sourceId": 4034894,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "Αβαρούα",
+            "current": "Avarua",
+            "externalId": "c893c7ec-791b-4d86-9091-a86aac274ee8",
+            "language": "el",
+            "sourceId": 4035715,
+            "type": "CITY"
+          },
+          {
+            "candidate": "อาวารัว",
+            "current": "อะวารัว",
+            "externalId": "c893c7ec-791b-4d86-9091-a86aac274ee8",
+            "language": "th",
+            "sourceId": 4035715,
+            "type": "CITY"
+          },
+          {
+            "candidate": "阿瓦魯阿",
+            "current": "阿瓦鲁阿",
+            "externalId": "c893c7ec-791b-4d86-9091-a86aac274ee8",
+            "language": "zh",
+            "sourceId": 4035715,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Ханга-Роа",
+            "current": "Анга-Роа",
+            "externalId": "9bca21b1-d5fd-4687-baea-a45f38e632c9",
+            "language": "ru",
+            "sourceId": 4030754,
+            "type": "CITY"
+          },
+          {
+            "candidate": "لامباييكه",
+            "current": "إقليم لمباييكه",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "ar",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Ламбайек",
+            "current": "Ламбайеке",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "bg",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambayeque",
+            "current": "Regió de Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "ca",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Oddělení Lambayeque",
+            "current": "Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "cs",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambayeque Afdeling",
+            "current": "Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "da",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambayeque",
+            "current": "Lambayeque Department",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "en",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambajekio",
+            "current": "Departemento de Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "eo",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambayeque",
+            "current": "Departamento de Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "es",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambayeque",
+            "current": "Lambayequen alue",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "fi",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Département de Lambayeque",
+            "current": "Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "fr",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambayeque",
+            "current": "Lambayeque megye",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "hu",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Departemen Lambayeque",
+            "current": "Region Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "id",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Dipartimento di Lambayeque",
+            "current": "Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "it",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "람바예케",
+            "current": "람바예케주",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "ko",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambajekė",
+            "current": "Lambajekės departamentas",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "lt",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Lambajeka",
+            "current": "Lambajekes departaments",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "lv",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Jabatan Lambayeque",
+            "current": "Wilayah Lambayeque",
+            "externalId": "17191ce5-0918-4fb8-a6a7-535cf2e02653",
+            "language": "ms",
+            "sourceId": 3695753,
+            "type": "SUBDIVISION"
+          }
+        ],
+        "topLanguageGains": {
+          "ar": 1045,
+          "bs": 1460,
+          "ca": 1142,
+          "cs": 1639,
+          "da": 973,
+          "et": 1449,
+          "fr": 966,
+          "he": 1078,
+          "hr": 1325,
+          "hu": 1477,
+          "it": 1239,
+          "ko": 1064,
+          "lt": 966,
+          "lv": 937,
+          "ml": 1293,
+          "no": 1898,
+          "pl": 1137,
+          "pt-BR": 1778,
+          "pt-PT": 2002,
+          "ro": 1255,
+          "sk": 1450,
+          "sl": 1271,
+          "sr-Cyrl": 2558,
+          "sr-Latn": 2141,
+          "sv": 1010,
+          "tr": 1002,
+          "uk": 1159,
+          "vi": 1076,
+          "zh-Hans": 1922,
+          "zh-Hant": 1850
+        },
+        "typeAndCountryCompatibleMatchRate": 0.2618,
+        "typeAndCountryCompatibleMatches": 9403
+      },
+      "provenance": "忽略目录中的匹配缓存保留 Overture sources 结构",
+      "recommendation": "仅作为独立 ODbL 输出候选，不得混入 MIT 核心数据",
+      "snapshot": {
+        "fetchedAt": "2026-09-20T08:36:52+00:00",
+        "file": {
+          "etag": "56a4893e0eb9e8a69ab63794194ebc26-9",
+          "key": "release/2026-08-19.0/theme=divisions/type=division/part-00000-4427279e-644a-58f2-bf86-ec1c351e39f4-c000.zstd.parquet",
+          "lastModified": "2026-08-19T15:46:19.000Z",
+          "size": 578060705
+        },
+        "release": "2026-08-19.0",
+        "source": "https://overturemaps-us-west-2.s3.us-west-2.amazonaws.com/release/2026-08-19.0/theme=divisions/type=division/part-00000-4427279e-644a-58f2-bf86-ec1c351e39f4-c000.zstd.parquet"
+      },
+      "status": "audited",
+      "validation": "Wikidata QID、地点类型和国家代码必须同时兼容"
+    },
+    "whosOnFirst": {
+      "license": "mixed; repository and record sources must be evaluated",
+      "matchKey": "Who's On First gn_id -> GeoNames ID",
+      "metrics": {
+        "conflictingExistingNameCount": 24610,
+        "countryMismatchRows": 106,
+        "exactIdentifierMatchRate": 0.9221,
+        "exactIdentifierMatches": 33121,
+        "incompatibleSourceTypes": {
+          "borough": 13,
+          "county": 421,
+          "localadmin": 209,
+          "locality": 40,
+          "neighbourhood": 519,
+          "region": 16
+        },
+        "locationsWithAnyNewName": 27073,
+        "missingChineseLocationsFilled": 11287,
+        "newLocalizedNamePairs": 275126,
+        "sampleChineseGains": [
+          {
+            "candidate": "科洛尼亚",
+            "currentName": "Kolonia",
+            "externalId": 1276348485,
+            "sourceId": 4043034,
+            "type": "CITY"
+          },
+          {
+            "candidate": "馬久羅",
+            "currentName": "Majuro",
+            "externalId": 890451463,
+            "sourceId": 2113779,
+            "type": "CITY"
+          },
+          {
+            "candidate": "阿爾諾環礁",
+            "currentName": "Arno",
+            "externalId": 1242713057,
+            "sourceId": 7306514,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Mili",
+            "currentName": "Mili",
+            "externalId": 1209650313,
+            "sourceId": 7306516,
+            "type": "CITY"
+          },
+          {
+            "candidate": "科可波",
+            "currentName": "Kokopo",
+            "externalId": 890444195,
+            "sourceId": 2093685,
+            "type": "CITY"
+          },
+          {
+            "candidate": "洛倫高",
+            "currentName": "Lorengau",
+            "externalId": 890432099,
+            "sourceId": 2092164,
+            "type": "CITY"
+          },
+          {
+            "candidate": "罗塔",
+            "currentName": "Rota",
+            "externalId": 85674797,
+            "sourceId": 4041530,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "天宁岛",
+            "currentName": "Tinian",
+            "externalId": 85674801,
+            "sourceId": 4041650,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "塞班岛",
+            "currentName": "Saipan",
+            "externalId": 85674803,
+            "sourceId": 4041552,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "亞加特",
+            "currentName": "Agat Village",
+            "externalId": 1125876909,
+            "sourceId": 4043804,
+            "type": "CITY"
+          },
+          {
+            "candidate": "皮蒂",
+            "currentName": "Piti Village",
+            "externalId": 890436031,
+            "sourceId": 4038473,
+            "type": "CITY"
+          },
+          {
+            "candidate": "穆里洛環礁",
+            "currentName": "Murilo",
+            "externalId": 890413009,
+            "sourceId": 7645191,
+            "type": "CITY"
+          },
+          {
+            "candidate": "伊戈",
+            "currentName": "Yigo Village",
+            "externalId": 890449853,
+            "sourceId": 4038794,
+            "type": "CITY"
+          },
+          {
+            "candidate": "伊納拉漢",
+            "currentName": "Inarajan",
+            "externalId": 1126028107,
+            "sourceId": 4043499,
+            "type": "CITY"
+          },
+          {
+            "candidate": "托福尔",
+            "currentName": "Tofol",
+            "externalId": 1259501137,
+            "sourceId": 2081342,
+            "type": "CITY"
+          }
+        ],
+        "sampleConflicts": [
+          {
+            "candidate": "タロア島",
+            "current": "タロア",
+            "externalId": 1226476409,
+            "language": "ja",
+            "sourceId": 4039539,
+            "type": "CITY"
+          },
+          {
+            "candidate": "атолл Маджуро",
+            "current": "Маджуро",
+            "externalId": 890451463,
+            "language": "ru",
+            "sourceId": 2113779,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Arno-Atoll",
+            "current": "Arno",
+            "externalId": 1242713057,
+            "language": "de",
+            "sourceId": 7306514,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Atolón Arno",
+            "current": "Arno",
+            "externalId": 1242713057,
+            "language": "es",
+            "sourceId": 7306514,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Atol Arno",
+            "current": "Arno",
+            "externalId": 1242713057,
+            "language": "id",
+            "sourceId": 7306514,
+            "type": "CITY"
+          },
+          {
+            "candidate": "アルノ環礁",
+            "current": "アルノ",
+            "externalId": 1242713057,
+            "language": "ja",
+            "sourceId": 7306514,
+            "type": "CITY"
+          },
+          {
+            "candidate": "атолл Мили",
+            "current": "Мили",
+            "externalId": 1209650313,
+            "language": "ru",
+            "sourceId": 7306516,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Kokopo",
+            "current": "Herbertshöhe",
+            "externalId": 890444195,
+            "language": "de",
+            "sourceId": 2093685,
+            "type": "CITY"
+          },
+          {
+            "candidate": "লোরেংগাউ",
+            "current": "লোরেনগাউ",
+            "externalId": 890432099,
+            "language": "bn",
+            "sourceId": 2092164,
+            "type": "CITY"
+          },
+          {
+            "candidate": "لورنگائو",
+            "current": "لورنگاو",
+            "externalId": 890432099,
+            "language": "fa",
+            "sourceId": 2092164,
+            "type": "CITY"
+          },
+          {
+            "candidate": "ローレンガウ",
+            "current": "ロレンガウ",
+            "externalId": 890432099,
+            "language": "ja",
+            "sourceId": 2092164,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Tinian",
+            "current": "Tiniá",
+            "externalId": 85674801,
+            "language": "es",
+            "sourceId": 4041650,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "テニアン島",
+            "current": "テニアン",
+            "externalId": 85674801,
+            "language": "ja",
+            "sourceId": 4041650,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "سایپن",
+            "current": "سایپان",
+            "externalId": 85674803,
+            "language": "fa",
+            "sourceId": 4041552,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "サイパン島",
+            "current": "サイパン",
+            "externalId": 85674803,
+            "language": "ja",
+            "sourceId": 4041552,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "사이판 섬",
+            "current": "사이판",
+            "externalId": 85674803,
+            "language": "ko",
+            "sourceId": 4041552,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Saipan",
+            "current": "Saipã",
+            "externalId": 85674803,
+            "language": "pt",
+            "sourceId": 4041552,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Wakeinsel",
+            "current": "Wake",
+            "externalId": 85680287,
+            "language": "de",
+            "sourceId": 4041685,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Moen",
+            "current": "Weno",
+            "externalId": 890433267,
+            "language": "en",
+            "sourceId": 2081114,
+            "type": "CITY"
+          },
+          {
+            "candidate": "لوئن",
+            "current": "لویین",
+            "externalId": 1343598371,
+            "language": "fa",
+            "sourceId": 7306521,
+            "type": "CITY"
+          },
+          {
+            "candidate": "جزائر مارشل",
+            "current": "مارشل آئلینڈز",
+            "externalId": 85632663,
+            "language": "ur",
+            "sourceId": 2080185,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "馬紹爾群島",
+            "current": "马绍尔群岛",
+            "externalId": 85632663,
+            "language": "zh",
+            "sourceId": 2080185,
+            "type": "COUNTRY"
+          },
+          {
+            "candidate": "إيبون",
+            "current": "إبون",
+            "externalId": 1193054971,
+            "language": "ar",
+            "sourceId": 7306512,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Ebon-Atoll",
+            "current": "Ebon",
+            "externalId": 1193054971,
+            "language": "de",
+            "sourceId": 7306512,
+            "type": "CITY"
+          },
+          {
+            "candidate": "ابرون",
+            "current": "ابون",
+            "externalId": 1193054971,
+            "language": "fa",
+            "sourceId": 7306512,
+            "type": "CITY"
+          },
+          {
+            "candidate": "エボン島",
+            "current": "エボン",
+            "externalId": 1193054971,
+            "language": "ja",
+            "sourceId": 7306512,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Bundesstaat Kosrae",
+            "current": "Kosrae",
+            "externalId": 85671231,
+            "language": "de",
+            "sourceId": 2082036,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "State of Kosrae",
+            "current": "Kosrae",
+            "externalId": 85671231,
+            "language": "en",
+            "sourceId": 2082036,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "State of Pohnpei",
+            "current": "Pohnpei State",
+            "externalId": 85671217,
+            "language": "en",
+            "sourceId": 2081550,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "پوہنپائی",
+            "current": "پوحنپیی اسٹیٹ",
+            "externalId": 85671217,
+            "language": "ur",
+            "sourceId": 2081550,
+            "type": "SUBDIVISION"
+          }
+        ],
+        "topLanguageGains": {
+          "ar": 6478,
+          "bn": 5401,
+          "de": 12325,
+          "el": 7779,
+          "en": 12885,
+          "es": 13109,
+          "fa": 7320,
+          "fr": 16468,
+          "he": 8118,
+          "hi": 5976,
+          "hu": 12968,
+          "id": 6109,
+          "it": 19469,
+          "ja": 7743,
+          "ko": 6562,
+          "nl": 20022,
+          "pl": 16200,
+          "pt": 12680,
+          "ru": 5167,
+          "sv": 16027,
+          "tr": 9304,
+          "uk": 13105,
+          "ur": 7231,
+          "vi": 15259,
+          "zh": 11421
+        },
+        "typeAndCountryCompatibleMatchRate": 0.8954,
+        "typeAndCountryCompatibleMatches": 32161
+      },
+      "provenance": "保留 WOF ID 和几何来源，但反规范化名称列没有字段级来源信息",
+      "recommendation": "仅用于审计；字段级许可证与来源未解决前不得合并",
+      "snapshot": {
+        "fetchedAt": "2026-09-20T08:18:09+00:00",
+        "inventory": "https://data.geocode.earth/wof/dist/parquet/inventory.json",
+        "inventoryEntry": {
+          "commit": "1a746740a8d4917d08327ac12bf280430523c07d89e36b32c6758fe771349291",
+          "last_modified": "2025-04-07T13:07:59.591Z",
+          "last_updated": "2025-04-07T05:25:23.000Z",
+          "name_compressed": "whosonfirst-data-admin-latest.parquet",
+          "repo": "whosonfirst-data-admin",
+          "sha256_compressed": "f465c3a6507b407d060bec7cfa96e95e028d7cc13fbd06739f2cc5aa4ee6de11",
+          "size_compressed": "5948636588"
+        },
+        "source": "https://data.geocode.earth/wof/dist/parquet/whosonfirst-data-admin-latest.parquet"
+      },
+      "status": "audited",
+      "validation": "GeoNames ID、地点类型和国家代码必须同时兼容"
+    },
+    "wikidata": {
+      "license": "CC0-1.0",
+      "matchKey": "GeoNames alternateNamesV2 wkdt -> Wikidata QID",
+      "metrics": {
+        "conflictingExistingNameCount": 29760,
+        "countryMismatchRows": 0,
+        "exactIdentifierMatchRate": 0.3391,
+        "exactIdentifierMatches": 12182,
+        "incompatibleSourceTypes": {},
+        "locationsWithAnyNewName": 12105,
+        "missingChineseLocationsFilled": 4242,
+        "newLocalizedNamePairs": 393771,
+        "sampleChineseGains": [
+          {
+            "candidate": "烏姆蓋萬 (城市)",
+            "currentName": "Umm al-Quwain",
+            "externalId": "Q2788830",
+            "sourceId": 290594,
+            "type": "CITY"
+          },
+          {
+            "candidate": "哈伊马角",
+            "currentName": "Ras al-Khaimah",
+            "externalId": "Q2126436",
+            "sourceId": 291074,
+            "type": "CITY"
+          },
+          {
+            "candidate": "哈伊马角酋长国",
+            "currentName": "Emirate of Ras Al Khaimah",
+            "externalId": "Q170024",
+            "sourceId": 291075,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "迪拜酋长国",
+            "currentName": "Dubai",
+            "externalId": "Q613",
+            "sourceId": 292224,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "沙迦酋長國",
+            "currentName": "Emirate of Sharjah",
+            "externalId": "Q188810",
+            "sourceId": 292673,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "富查伊拉酋长国",
+            "currentName": "Emirate of Fujairah",
+            "externalId": "Q4091",
+            "sourceId": 292879,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "阿治曼",
+            "currentName": "Ajman",
+            "externalId": "Q530171",
+            "sourceId": 292932,
+            "type": "CITY"
+          },
+          {
+            "candidate": "阿治曼酋长国",
+            "currentName": "Ajman Emirate",
+            "externalId": "Q159477",
+            "sourceId": 292933,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "塔林科特",
+            "currentName": "Tarinkot",
+            "externalId": "Q989293",
+            "sourceId": 1122747,
+            "type": "CITY"
+          },
+          {
+            "candidate": "萨尔普勒",
+            "currentName": "Sar-e Pul",
+            "externalId": "Q1649301",
+            "sourceId": 1127110,
+            "type": "CITY"
+          },
+          {
+            "candidate": "桑金市",
+            "currentName": "Sangin",
+            "externalId": "Q2457742",
+            "sourceId": 1127547,
+            "type": "CITY"
+          },
+          {
+            "candidate": "萨曼甘",
+            "currentName": "Aybak",
+            "externalId": "Q1020649",
+            "sourceId": 1127768,
+            "type": "CITY"
+          },
+          {
+            "candidate": "瑙堡",
+            "currentName": "Qala i Naw",
+            "externalId": "Q26396",
+            "sourceId": 1129867,
+            "type": "CITY"
+          },
+          {
+            "candidate": "帕尔旺省",
+            "currentName": "Parwan",
+            "externalId": "Q188157",
+            "sourceId": 1131054,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "巴拉穆爾加布",
+            "currentName": "Bala Murghab",
+            "externalId": "Q3867397",
+            "sourceId": 1132770,
+            "type": "CITY"
+          }
+        ],
+        "sampleConflicts": [
+          {
+            "candidate": "Sant Julià de Lòria",
+            "current": "Parròquia de Sant Julià de Lòria",
+            "externalId": "Q24282",
+            "language": "ca",
+            "sourceId": 3039162,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "San Julián de Loria",
+            "current": "Sant Julià de Lòria",
+            "externalId": "Q24282",
+            "language": "es",
+            "sourceId": 3039162,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "เขตซันฌูลิอาดาลอริอา",
+            "current": "ซันฌูลิอาดาลอริอา",
+            "externalId": "Q24282",
+            "language": "th",
+            "sourceId": 3039162,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "San Julián de Loria",
+            "current": "Sant Julià de Lòria",
+            "externalId": "Q1120573",
+            "language": "es",
+            "sourceId": 3039163,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Ordino",
+            "current": "Parròquia d'Ordino",
+            "externalId": "Q24272",
+            "language": "ca",
+            "sourceId": 3039676,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "เขตอูร์ดินู",
+            "current": "อูร์ดินู",
+            "externalId": "Q24272",
+            "language": "th",
+            "sourceId": 3039676,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "an",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "de",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "es",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "لس اسکالدس",
+            "current": "اسکالدس-انگوردانی",
+            "externalId": "Q1050185",
+            "language": "fa",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "fr",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "it",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "レス・エスカルデス",
+            "current": "エスカルデス＝エンゴルダニ教区",
+            "externalId": "Q1050185",
+            "language": "ja",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "ms",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "nl",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escaldes",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "pl",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Les Escalades",
+            "current": "Escaldes-Engordany",
+            "externalId": "Q1050185",
+            "language": "pt",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "لیس ایسکالیدس",
+            "current": "اسکالڈس-انگورڈانی",
+            "externalId": "Q1050185",
+            "language": "ur",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "莱塞斯卡尔",
+            "current": "萊塞斯卡爾德－恩戈爾達",
+            "externalId": "Q1050185",
+            "language": "zh",
+            "sourceId": 3040051,
+            "type": "CITY"
+          },
+          {
+            "candidate": "la Massana",
+            "current": "Parròquia de la Massana",
+            "externalId": "Q24276",
+            "language": "ca",
+            "sourceId": 3040131,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "เขตลามาซานา",
+            "current": "ลามาซานา",
+            "externalId": "Q24276",
+            "language": "th",
+            "sourceId": 3040131,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Encamp",
+            "current": "Parròquia d'Encamp",
+            "externalId": "Q24269",
+            "language": "ca",
+            "sourceId": 3040684,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "เขตอังกัม",
+            "current": "อังกัม",
+            "externalId": "Q24269",
+            "language": "th",
+            "sourceId": 3040684,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Canillo",
+            "current": "Parròquia de Canillo",
+            "externalId": "Q24260",
+            "language": "ca",
+            "sourceId": 3041203,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "เขตกานิลยู",
+            "current": "กานิลยู",
+            "externalId": "Q24260",
+            "language": "th",
+            "sourceId": 3041203,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Canillo (miasto)",
+            "current": "Canillo",
+            "externalId": "Q386802",
+            "language": "pl",
+            "sourceId": 3041204,
+            "type": "CITY"
+          },
+          {
+            "candidate": "Andorra la Vella",
+            "current": "Parròquia d'Andorra la Vella",
+            "externalId": "Q2522163",
+            "language": "ca",
+            "sourceId": 3041566,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "Parroquia de Andorra la Vella",
+            "current": "Andorra la Vella",
+            "externalId": "Q2522163",
+            "language": "es",
+            "sourceId": 3041566,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "les Escaldes i Engordany",
+            "current": "Parròquia d'Escaldes-Engordany",
+            "externalId": "Q24286",
+            "language": "ca",
+            "sourceId": 3338529,
+            "type": "SUBDIVISION"
+          },
+          {
+            "candidate": "เขตอัสกัลดัส–อังกูร์ดัญ",
+            "current": "อัสกัลดัส-อังกูร์ดัญ",
+            "externalId": "Q24286",
+            "language": "th",
+            "sourceId": 3338529,
+            "type": "SUBDIVISION"
+          }
+        ],
+        "topLanguageGains": {
+          "azb": 4143,
+          "ca": 5615,
+          "ce": 4643,
+          "ceb": 8788,
+          "cs": 4237,
+          "da": 4972,
+          "de": 4694,
+          "en": 4545,
+          "es": 5175,
+          "eu": 4397,
+          "fr": 5399,
+          "ga": 5946,
+          "hu": 4858,
+          "it": 6515,
+          "nan": 4163,
+          "nb": 6277,
+          "nl": 7310,
+          "pl": 5780,
+          "pt": 4268,
+          "sh": 6218,
+          "sl": 4261,
+          "sv": 6815,
+          "tr": 4256,
+          "tt": 4118,
+          "uk": 4371,
+          "vi": 4440,
+          "war": 4382,
+          "zh": 4258,
+          "zh-Hans": 4670,
+          "zh-Hant": 4777
+        },
+        "typeAndCountryCompatibleMatchRate": 0.3391,
+        "typeAndCountryCompatibleMatches": 12182
+      },
+      "provenance": "缓存为每个实体保留 QID、修订号和修改时间",
+      "recommendation": "可作为核心补充候选，但必须先审查名称冲突",
+      "snapshot": {
+        "api": "https://www.wikidata.org/w/api.php",
+        "entityRevisionPinnedInCache": true,
+        "fetchedEntityCount": 12158
+      },
+      "status": "audited",
+      "validation": "GeoNames explicit wkdt link; Wikidata P31 and country hierarchy were not fetched in this name-coverage audit"
+    }
+  },
+  "summary": {
+    "overture": {
+      "compatibleMatches": 9403,
+      "exactMatches": 9763,
+      "missingChineseFilled": 958,
+      "newNamePairs": 87058
+    },
+    "whosOnFirst": {
+      "compatibleMatches": 32161,
+      "exactMatches": 33121,
+      "missingChineseFilled": 11287,
+      "newNamePairs": 275126
+    },
+    "wikidata": {
+      "compatibleMatches": 12182,
+      "exactMatches": 12182,
+      "missingChineseFilled": 4242,
+      "newNamePairs": 393771
+    }
+  }
+}
