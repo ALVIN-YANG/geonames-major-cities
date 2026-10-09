@@ -1,5 +1,8 @@
 # GeoNames 主要城市数据生成器
 
+[![自动测试](https://img.shields.io/github/actions/workflow/status/ALVIN-YANG/geonames-major-cities/test.yml?branch=main&label=tests)](https://github.com/ALVIN-YANG/geonames-major-cities/actions/workflows/test.yml)
+[![代码许可证：MIT](https://img.shields.io/badge/code_license-MIT-blue)](LICENSE)
+
 这是一个可重复构建的地点数据流水线，把固定版本的 GeoNames 数据整理成适合产品下拉选择的三级结构：
 
 ```text
@@ -8,13 +11,17 @@
 
 它会输出压缩 CSV、SQLite 数据库、质量报告，以及一个可以直接双击打开的多语言完整数据浏览页。构建过程只依赖 Python 标准库。
 
-[打开仓库内的轻量展示页](docs/index.html)
+[打开在线项目展示页](https://alvin-yang.github.io/geonames-major-cities/) · [English](README.md)
+
+在线页展示流水线、固定快照数量和数据来源；要浏览完整的多语言数据，请按下方命令构建，再打开 `output/review.html`。
 
 ## 快速使用
 
 需要 Python 3.11 或更高版本。
 
 ```bash
+git clone https://github.com/ALVIN-YANG/geonames-major-cities.git
+cd geonames-major-cities
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
