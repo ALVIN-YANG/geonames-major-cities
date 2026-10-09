@@ -1,5 +1,8 @@
 # GeoNames Major Cities
 
+[![Tests](https://img.shields.io/github/actions/workflow/status/ALVIN-YANG/geonames-major-cities/test.yml?branch=main&label=tests)](https://github.com/ALVIN-YANG/geonames-major-cities/actions/workflows/test.yml)
+[![Code license: MIT](https://img.shields.io/badge/code_license-MIT-blue)](LICENSE)
+
 A small, reproducible pipeline that turns pinned GeoNames dumps into a practical three-level location dataset:
 
 ```text
@@ -10,7 +13,9 @@ It produces compressed CSV files, a queryable SQLite database, a quality report,
 
 [中文说明](README.zh-CN.md)
 
-[Open the lightweight project presentation](docs/index.html)
+[Open the live project overview](https://alvin-yang.github.io/geonames-major-cities/)
+
+The overview explains the pipeline, snapshot counts, and source attribution. To browse the full multilingual dataset, build it locally and open `output/review.html`.
 
 ## Why this exists
 
@@ -23,6 +28,8 @@ This project makes the selection policy explicit, pins every input by SHA-256, a
 Python 3.11 or newer is required.
 
 ```bash
+git clone https://github.com/ALVIN-YANG/geonames-major-cities.git
+cd geonames-major-cities
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .

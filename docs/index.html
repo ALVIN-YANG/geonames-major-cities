@@ -266,7 +266,7 @@
 <body>
 <main>
   <header class="mast">
-    <div class="utility"><span>GeoNames major cities / 0.2</span><span>Reproducible location data</span><span>MIT code · attributed data</span></div>
+    <div class="utility"><span>GeoNames major cities / 0.3</span><span>Reproducible location data</span><span>MIT code · attributed data</span></div>
     <h1>A world location index with its decisions left visible.</h1>
     <p class="intro">Build a practical country, first-level subdivision, and major-city list from checksum-pinned GeoNames sources. Keep every source ID, coordinate, inclusion reason, and localized name.</p>
     <p class="path"><span>country</span><i>→</i><span>subdivision</span><i>→</i><span>major city</span></p>
@@ -277,6 +277,7 @@
       <div><b>526</b><span>language tags</span></div>
       <div><b class="ok">PASS</b><span>quality status</span></div>
     </div>
+    <p class="note">Verified snapshot: 2026-09-17. This page shows two name examples; build locally to browse the complete dataset. <a href="https://github.com/ALVIN-YANG/geonames-major-cities">Source and instructions</a> · <a href="https://github.com/ALVIN-YANG/geonames-major-cities/blob/main/README.zh-CN.md">中文说明</a></p>
   </header>
 
   <section class="demo" aria-label="Localized name example">
@@ -305,8 +306,12 @@
   </section>
 
   <section class="run">
-    <div><h2 class="section-title">Build it yourself</h2><p class="intro" style="font-size:16px">One command downloads checksum-pinned inputs and writes compressed CSV, SQLite, a quality report, and a self-contained browser.</p></div>
-    <pre><code>python -m pip install -e .
+    <div><h2 class="section-title">Build it yourself</h2><p class="intro" style="font-size:16px">With Python 3.11 or newer, clone the repository and build the pinned snapshot. The output includes compressed CSV, SQLite, a quality report, and a self-contained browser.</p></div>
+    <pre><code>git clone https://github.com/ALVIN-YANG/geonames-major-cities.git
+cd geonames-major-cities
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 
 geonames-major-cities all \
   --manifest manifests/geonames-2026-09-17.json \
@@ -314,7 +319,7 @@ geonames-major-cities all \
   --output-dir output</code></pre>
   </section>
 
-  <footer><span>Code: MIT</span><span>Data: GeoNames CC BY 4.0 · Chinese policy source attributed in DATA_SOURCES.md</span></footer>
+  <footer><span>Code: MIT</span><span>Data: GeoNames CC BY 4.0 · <a href="https://github.com/ALVIN-YANG/geonames-major-cities/blob/main/DATA_SOURCES.md">Source licenses and attribution</a></span></footer>
 </main>
 <script>
   const examples = {
